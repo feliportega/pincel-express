@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRECT = process.env.JWT_SECRECT;
 
 module.exports = (req,res, next) => {
-    const token = req.headers["autorization"];
+    const token = req.headers["authorization"];
 
     if (!token)
         return res.status(401).json({ msg: "Token requerido"});

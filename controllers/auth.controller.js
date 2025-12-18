@@ -41,7 +41,21 @@ exports.login = async (req,res) => {
                 JWT_SECRECT,
                 { expiresIn: "2h"}
             );
+            res.json({ msg:"Login exitoso", token})
     } catch (error) {
-        res.json(500).json({ error: error.message});
+        res.status(500).json({ msg:"error", error: error.message});
     }
 };
+
+exports.delete = async (req,res) => {
+    const userId = req.user.id;
+    try{
+        await prisma.usuario.delete({
+            where:{id: userId}
+        });
+        res.json({msg:"usuario eliminado"});
+
+    } catch(error){
+        res.status(500).json({error: error.message})
+    }
+}
